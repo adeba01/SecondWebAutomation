@@ -47,6 +47,7 @@ class BasePage {
         await this.scrollToElement(elementLnk);
         await elementLnk.click();
         const upldAndDwnLnk = await this.driver.findElement(this.UploadAndDownLink);
+        await this.scrollToElement(upldAndDwnLnk);
         await upldAndDwnLnk.click();
        // const uploadBttn = await this.driver.findElement(this.UploadButton);
        // await uploadBttn.click();
