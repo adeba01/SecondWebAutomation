@@ -1,0 +1,11 @@
+
+{
+  "name":"js-automation",
+  "version":"1.0.0",
+  "scripts":{
+    "test":"node Test/TestRunner.js"
+  },
+  "dependencies": {
+    "selenium-webdriver": "^4.21.0"
+  }
+}
