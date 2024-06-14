@@ -57,7 +57,7 @@ class BasePage {
         const fileInputElement = await this.driver.wait(until.elementLocated(fileInputSelector), 10000);
         await fileInputElement.sendKeys(filePath);
     }
-    async DownloadFile(){
+    async downloadFile(){
         const dwnld = await this.driver.findElement(this.DownLoadLink);
         await dwnld.click();
     }
