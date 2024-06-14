@@ -15,10 +15,6 @@ class BasePage {
         this.DoubleClickLink = By.id('doubleClickBtn');
         //this.adevertCloseButton = By.css('html.i-amphtml-inabox body.amp-animate div#abgc.abgc.abgf.pen form#mta.sh.ss.jm.amp-animate.abgf.pen label#cbb.cbb.pea svg path');
     }
-      /*  async open(path){
-            await this.driver.get(path);
-    }*/
-
     //async closeAdvert(){
        // try{
        //     const advert = await this.driver.wait(until.elementLocated(this.advertCloseButton), 50000);
