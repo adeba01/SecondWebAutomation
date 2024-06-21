@@ -9,7 +9,7 @@ class ElementFunctionality extends BasePage{
     async firstTest(url){
         await this.driver.get(url);
         await this.navigateToElementLInk();
-        await this.downloadFile();
+       // await this.downloadFile();
         const fileInputSelector = By.id('uploadFile');
         const filePath = 'C:\\Users\\LENOVO\\OneDrive - TestSolutions GmbH\\Desktop\\Emmanuel.jpg';
         await this.uploadFile(fileInputSelector, filePath);
