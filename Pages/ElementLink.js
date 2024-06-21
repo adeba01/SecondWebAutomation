@@ -12,7 +12,7 @@ class ElementFunctionality extends BasePage{
         await this.downloadFile();
         //const fileInputSelector = By.id('uploadFile');
         //const filePath = 'C:\\Users\\LENOVO\\OneDrive - TestSolutions GmbH\\Desktop\\Emmanuel.jpg';
-        await this.uploadFile(fileInputSelector, filePath);
+        //await this.uploadFile(fileInputSelector, filePath);
     }
 }
 
