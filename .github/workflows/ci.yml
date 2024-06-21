@@ -34,7 +34,17 @@ jobs:
         wget https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_VERSION/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
         tar -xzf geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
         sudo mv geckodriver /usr/local/bin/
+        sudo chmod +x /usr/local/bin/geckodriver
         rm geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
+      env:
+        PATH: /usr/local/bin:$PATH
+
+    - name: Verify installations
+      run: |
+        which firefox
+        firefox --version
+        which geckodriver
+        geckodriver --version
 
     - name: Run tests
       run: npm test
@@ -43,10 +53,3 @@ jobs:
       if: success()
       run: |
         aws s3 sync ./build s3://my-bucket-name
-
-    - name: List installed browsers
-      run: |
-        which firefox
-        firefox --version
-        which geckodriver
-        geckodriver --version
