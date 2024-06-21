@@ -43,3 +43,10 @@ jobs:
       if: success()
       run: |
         aws s3 sync ./build s3://my-bucket-name
+
+    - name: List installed browsers
+      run: |
+        which firefox
+        firefox --version
+        which geckodriver
+        geckodriver --version
