@@ -1,29 +1,45 @@
 name: Node.js CI
 
 on:
-    push:
-        branches: [ "master" ] 
-    pull_request:
-        branches: [ "master" ]
-
+  push:
+    branches:
+      - master
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-        
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v2
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
 
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v2
-              with:
-                node-version: '20'
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
 
-            - name: Install dependencies
-              run: npm install
+    - name: Install dependencies
+      run: npm install
 
-            - name: Run tests
-              run: npm test
+    - name: Install Firefox
+      run: sudo apt-get install -y firefox
+
+    - name: Install GeckoDriver
+      run: |
+        GECKODRIVER_VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep 'tag_name' | cut -d\" -f4)
+        wget https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_VERSION/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
+        tar -xzf geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
+        sudo mv geckodriver /usr/local/bin/
+        rm geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
+
+    - name: Run tests
+      run: npm test
+
+    - name: Deploy to S3
+      if: success()
+      run: |
+        aws s3 sync ./build s3://my-bucket-name
